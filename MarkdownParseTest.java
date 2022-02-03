@@ -94,4 +94,9 @@ public class MarkdownParseTest {
         List<String> expect = List.of("a link on the first line");
         assertEquals(expect, MarkdownParse.getLinks(contents));
     }
+
+    @Test
+    public void failingTest() throws IOException {
+        assertEquals(2, 1+2);
+    }
 }
