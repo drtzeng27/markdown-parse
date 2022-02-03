@@ -11,19 +11,24 @@ public class MarkdownParse {
         // the next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
+            
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
-            if (nextOpenBracket == -1) break; //check if there is another link
-            int nextCloseBracketOpenParen = markdown.indexOf("](", nextOpenBracket);
-            int closeParen = markdown.indexOf(")", nextCloseBracketOpenParen);
-
-            //check if it is an image
+            if(nextOpenBracket == -1){
+                break;
+            }
+            int nextCloseBracket = markdown.indexOf("](", nextOpenBracket);
+            if(nextCloseBracket == -1){
+                break;
+            }
+            int closeParen = markdown.indexOf(")", nextCloseBracket);
+            
             if (nextOpenBracket > 0 && markdown.charAt(nextOpenBracket - 1) == '!') {
                 currentIndex = closeParen + 1;
                 continue;
             }
-
-            toReturn.add(markdown.substring(nextCloseBracketOpenParen + 2, closeParen));
+            toReturn.add(markdown.substring(nextCloseBracket + 2, closeParen));
             currentIndex = closeParen + 1;
+            //System.out.println(currentIndex);
         }
         return toReturn;
     }
