@@ -21,7 +21,10 @@ public class MarkdownParse {
                 break;
             }
             int closeParen = markdown.indexOf(")", nextCloseBracket);
-
+            if (closeParen == -1){
+                break;
+            }
+            
             //check for image
             if (nextOpenBracket > 0 && markdown.charAt(nextOpenBracket - 1) == '!') {
                 currentIndex = closeParen + 1;
