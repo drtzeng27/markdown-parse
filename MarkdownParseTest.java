@@ -8,13 +8,13 @@ import java.util.*;
 
 //javac -cp ".;lib\junit-4.13.2.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
 //java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore MarkdownParseTest
-
+//change
 public class MarkdownParseTest {
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
     }
-
+    /*
     @Test //test-file.md
     public void testfile() throws IOException {
         Path fileName = Path.of("test-file.md");
@@ -45,7 +45,7 @@ public class MarkdownParseTest {
         String contents = Files.readString(fileName);
         List<String> expect = List.of();
         assertEquals(expect, MarkdownParse.getLinks(contents));
-    }
+    }*/
 
     @Test
     public void testfile3md() throws IOException {
@@ -96,15 +96,31 @@ public class MarkdownParseTest {
     }
 
     @Test
-    public void test4md() throws IOException {
-        Path fileName = Path.of("test4.md");
+    public void failingTest() throws IOException {
+        assertEquals(2, 1+1);
+    }
+
+    @Test
+    public void snippet1md() throws IOException {
+        Path fileName = Path.of("snippet1.md");
         String contents = Files.readString(fileName);
-        List<String> expect = List.of();
+        List<String> expect = List.of("`google.com", "google.com", "ucsd.edu");
         assertEquals(expect, MarkdownParse.getLinks(contents));
     }
 
     @Test
-    public void failingTest() throws IOException {
-        assertEquals(2, 1+1);
+    public void snippet2md() throws IOException {
+        Path fileName = Path.of("snippet2.md");
+        String contents = Files.readString(fileName);
+        List<String> expect = List.of("a.com", "a.com(())", "example.com");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
+    @Test
+    public void snippet3md() throws IOException {
+        Path fileName = Path.of("snippet3.md");
+        String contents = Files.readString(fileName);
+        List<String> expect = List.of("https://ucsd-cse15l-w22.github.io/");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
     }
 }
